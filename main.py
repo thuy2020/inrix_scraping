@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from html_doc import html_doc
 import pandas as pd
-
+import os
 
 soup = BeautifulSoup(html_doc, 'lxml')
 containers = soup.find_all('div', role='row')
@@ -35,4 +35,8 @@ df = df[df['country'] == 'unitedstates']
 df = df.drop('country', axis=1)
 
 print(df)
-df.to_csv("delay_hour_2022_US_urban_area.csv")
+
+output = os.path.join(os.getcwd(), 'output')
+os.makedirs(output)
+
+df.to_csv('output/delay_hour_2022_US_urban_area.csv')
